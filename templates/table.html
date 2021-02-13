@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block main %}
+  <table class="stats cell-border stripe">
+    <thead>
+      <tr>
+        <th>Party</th>
+        <th>Average</th>
+        <th>Median</th>
+        <th>Total Spend</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for party, stats in groupings.items() %}
+        <tr>
+          <td>
+            {{ party }}
+          </td>
+          {% for field in stats %}
+            <td>
+              {{ field }}
+            </td>
+          {% endfor %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h1>CSV Data</h1>
+
+  <table class="parsed-data cell-border stripe hover">
+    <thead>
+      <tr>
+        {% for field in headers %}
+          <th>
+            {{ field }}
+          </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+        <tr>
+          {% for field in row.values() %}
+            <td>
+              {{ field }}
+            </td>
+          {% endfor %}
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
